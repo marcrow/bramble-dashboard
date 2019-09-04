@@ -42,9 +42,13 @@
                         <h3 class="text-center">Bramble console</h3>
                             <div class="embed-responsive-16by9">
 			<iframe
-			src="https://192.168.1.42:4443/?hostname=bramble&username=test&password=password" class="embed-responsive-item" width="100%" height="500" id="console_frame" name="console_frame">
-			  <p>
-			    <a href="https://192.168.1.42:4443/?hostname=bramble&username=test&password=password">
+			<?php
+				echo 'src="https://'.$_SERVER["SERVER_ADDR"].':4443/?hostname='.$_SERVER["SERVER_ADDR"].'&username=bramble&password=password" class="embed-responsive-item" width="100%" height="500" id="console_frame" name="console_frame">';
+			?>  
+			<p>
+			<?php
+			    echo '<a href="https://'.$_SERVER["SERVER_ADDR"].'/?hostname='.$_SERVER["SERVER_ADDR"].'&username=bramble&password=password">';
+			?>
 			      iframe doesn't work click on this link to access to the console.<i>iframes</i>.
 			    </a>
 			  </p>

@@ -1,6 +1,5 @@
 <!doctype html>
 <html lang="en">
-
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -40,9 +39,13 @@
 
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 embed-responsive-16by9">
 			<iframe
-			src="https://192.168.1.42:80" width="100%" height="500" id="console_frame" class="embed-responsive-item" name="console_frame" allowfullscreen>
+			<?php
+				echo 'src="https://'.$_SERVER["SERVER_ADDR"].':80" width="100%" height="500" id="console_frame" class="embed-responsive-item" name="console_frame" allowfullscreen>';
+			?>
 			  <p>
-			    <a href="https://192.168.1.42:80/">
+			<?php
+			    echo '<a href="https://'.$_SERVER["SERVER_ADDR"].'192.168.1.42:80/">';
+			?>
 			      iframe doesn't work click on this link to access to the file arborescence.<i>iframes</i>.
 			    </a>
 			  </p>
