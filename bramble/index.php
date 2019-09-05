@@ -117,7 +117,7 @@
                         <?php $int=shell_exec('ip a');
                         $start=True;
                         foreach(preg_split("/((\r?\n)|(\r\n?))/", $int) as $line){
-                            if(preg_match("/([0-9])/",$line[0])){
+                            if(!empty($line) && preg_match("/([0-9])/",$line[0])){
                                 if(!$start){
                                     echo'</div></div></div>';
                                 }
