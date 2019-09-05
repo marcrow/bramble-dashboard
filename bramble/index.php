@@ -72,13 +72,19 @@
                     <!-- ============================================================== -->
                     <!-- info  -->
                     <!-- ============================================================== -->
-                    <?php $int=exec('ping 8.8.8.8 -c 1');
-                    if(empty($int)){
-                        echo '<div class="alert alert-danger" role="alert">No Internet access</div>';
-                    }
-                    else{
-                        echo'<div class="alert alert-success" role="alert">Internet access</div>';
-                    } ?>
+
+
+                    <?php //check the internet connectivity
+                        $host = 'google.com';
+                        $port = 80;
+                        $waitTimeoutInSeconds = 1;
+                        if($fp = fsockopen($host,$port,$errCode,$errStr,$waitTimeoutInSeconds)){
+                            echo'<div class="alert alert-success" role="alert">Internet access</div>';
+                        } else {
+                            echo '<div class="alert alert-danger" role="alert">No Internet access</div>';
+                        }
+                        fclose($fp);
+                    ?>
 
                     <div class="row">
                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
