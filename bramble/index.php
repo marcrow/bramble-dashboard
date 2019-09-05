@@ -72,6 +72,14 @@
                     <!-- ============================================================== -->
                     <!-- info  -->
                     <!-- ============================================================== -->
+                    <?php $int=exec('ping 8.8.8.8 -c 1');
+                    if(empty($int)){
+                        echo '<div class="alert alert-danger" role="alert">No Internet access</div>';
+                    }
+                    else{
+                        echo'<div class="alert alert-success" role="alert">Internet access</div>';
+                    } ?>
+
                     <div class="row">
                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                             <div class="section-block" id="cards">
