@@ -53,13 +53,13 @@
                     <div class="row">
                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                             <div class="page-header">
-                                <h2 class="pageheader-title">E-commerce Dashboard Template </h2>
+                                <h2 class="pageheader-title">Bramble Dashboard </h2>
                                 <p class="pageheader-text">Nulla euismod urna eros, sit amet scelerisque torton lectus vel mauris facilisis faucibus at enim quis massa lobortis rutrum.</p>
                                 <div class="page-breadcrumb">
                                     <nav aria-label="breadcrumb">
                                         <ol class="breadcrumb">
                                             <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Dashboard</a></li>
-                                            <li class="breadcrumb-item active" aria-current="page">E-Commerce Dashboard Template</li>
+                                            <li class="breadcrumb-item active" aria-current="page">Bramble Dashboard</li>
                                         </ol>
                                     </nav>
                                 </div>
@@ -68,6 +68,87 @@
                     </div>
                     <!-- ============================================================== -->
                     <!-- end pageheader  -->
+                    <!-- ============================================================== -->
+                    <!-- ============================================================== -->
+                    <!-- info  -->
+                    <!-- ============================================================== -->
+                    <div class="row">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                            <div class="section-block" id="cards">
+                                <h3 class="section-title">General</h3>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h3 class="card-title">Bramble IP address</h3>
+                                    <p class="card-text"><?php echo $_SERVER['SERVER_ADDR']; ?></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h3 class="card-title">Your IP address</h3>
+                                    <p class="card-text"><?php echo $_SERVER['REMOTE_ADDR'] ?></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ============================================================== -->
+                    <!-- end info  -->
+                    <!-- ============================================================== -->
+                    <!-- ============================================================== -->
+                    <!-- ip  -->
+                    <!-- ============================================================== -->
+
+
+                    <div class="row">
+
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                            <div class="section-block" id="cards">
+                                <h3 class="section-title">Network interfaces</h3>
+                                <p>lo for localhost, eth(number) for ethernet interface, wlan(number) for wireless interface (wifi)</p>
+                            </div>
+                        </div>
+
+                        <?php $int=shell_exec('ip a');
+                        $start=True;
+                        foreach(preg_split("/((\r?\n)|(\r\n?))/", $int) as $line){
+                            if(preg_match("/([0-9])/",$line[0])){
+                                if(!$start){
+                                    echo'</div></div></div>';
+                                }
+                                else $start = False;
+                                list($number, $name, $state) = explode(":", $line,3);
+                                //echo "<p>*** $number : $name\n</p>";
+                                echo '<div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <h3 class="card-title">'.$name.'</h3>';
+                                if(preg_match("/state DOWN/",$line)){
+                                    echo '<div class="alert alert-danger" role="alert">DOWN</div>';
+                                }
+                                else{
+                                    echo '<div class="alert alert-success" role="alert">UP</div>';
+                                }
+                            }
+                            $data = substr($line,4,-1);
+                            if(preg_match("/^inet/",$data)){
+                                list($type, $addr) = explode(" ", $data);
+                                //echo "<p>--- $type -> $addr\n</p>";
+                                $type == "inet" ? $type = "IPv4" : $type ="IPv6";
+                                echo '<p class="card-text"> <span class="badge badge-info">'.$type .'</span><br/>'. $addr.'</p>';
+
+                            }
+                        }
+                        echo'</div></div></div>';
+                        ?>
+                    </div>
+                    <!-- ============================================================== -->
+                    <!-- end ip  -->
                     <!-- ============================================================== -->
                     <div class="ecommerce-widget">
 
