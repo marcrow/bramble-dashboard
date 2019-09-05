@@ -79,7 +79,7 @@
         <a href="#!" onclick="clipboard(0)" class="list-group-item active"><i class="fas fa-terminal"></i> Open Bramble Software with the following command : <i class="js-command0">sudo bramble</i>
           <footer class="blockquote-footer">Click to copy in the clipboard</footer>
         </a>
-        <a target="_blank" rel="noopener noreferrer " href="https://<?php echo 'https://'.$_SERVER["SERVER_ADDR"].':4443/';?>" class="list-group-item list-group-item-action"><i class="fas fa-window-restore"></i> Open in full screen
+        <a target="_blank" rel="noopener noreferrer " href="<?php echo 'https://'.$_SERVER["SERVER_ADDR"].':4443/';?>" class="list-group-item list-group-item-action"><i class="fas fa-window-restore"></i> Open in full screen
           <footer class="blockquote-footer">Click here to open in a new window</footer>
         </a>
         <a href="#!" onclick="clipboard(1)" class="list-group-item active"><i class="fas fa-terminal"></i> To have all privilege use the following command : <i class="js-command1">sudo su</i>
