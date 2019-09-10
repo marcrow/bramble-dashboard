@@ -24,7 +24,7 @@
                                             <a class="nav-link" href="files_view.php"><i class="fas fa-fw fa-file"></i>Files</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="#"><i class="fas fa-fw fa-wifi"></i>Wifi</a>
+                                            <a class="nav-link" href="wifi.php"><i class="fas fa-fw fa-wifi"></i>Wifi</a>
                                         </li>
 
 
