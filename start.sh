@@ -9,7 +9,7 @@ logfile=/var/log/wssh
 red="\e[31m"
 default="\e[39m"
 
-echo -e $red
+echo -e "$red \c"
 
 systemctl start apache2 2>&1
 
@@ -23,7 +23,7 @@ for pid in $(ps -aux | grep wssh | awk '{print $2}'); do
 	kill $pid 2> /dev/null
 done
 
-if [[ $(du -k $logfile | cut -f1) -ge 5 ]]; then
+if [[ $(du -k $logfile | cut -f1) -ge 3000 ]]; then
 	line=$(wc -l $logfile | cut -d ' ' -f 1)
 	middle=$(expr $line / 2)
 	echo "The wssh log file becomes too large."
@@ -32,7 +32,8 @@ if [[ $(du -k $logfile | cut -f1) -ge 5 ]]; then
 	sed "1,$middle d" -i $logfile
 fi
 
-echo -e $default
+echo -e "$default \c"
 
 wssh --certfile=$certif --keyfile=$key --sslport=$port &> $logfile &
 
+echo "If the console is not accessible in the dashboard, check the log file $logfile"

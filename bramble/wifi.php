@@ -83,14 +83,21 @@
 Refresh</a></h3>
                                         <br/>
                         <?php
-                        $int=shell_exec('sudo iw dev wlp2s0 scan | grep "SSID:\|signal:"');
+                        $int=shell_exec('sudo iw dev wlan0 scan | grep "SSID:\|signal:"');
                         $i=0;
                         foreach(preg_split("/((signal:))/", $int) as $line){
                             $i=$i+1;
                             //<-40 perfect, <-50 excellent, <-60 good, <-70 medium, <-80 Unreliable, <-90 too low
-                            list($signal, $ssid) = explode("SSID: ", $line);
-                            if(empty($ssid)) continue;
-
+			    			if(empty($line)|| strlen($line)==1){
+			    				continue;
+			    			}
+							if(preg_match("/((SSID: ))/",$line)!=1){
+								echo "error :";
+								echo $line;
+								continue;
+							}
+                            list($signal, $ssid) = explode("SSID: ", $line, 2);
+                            if(empty($ssid) || strlen($ssid)==1) continue;
 
                             $signal = preg_replace('~\D~', '', $signal);
                             $signal = (int)$signal/100;
