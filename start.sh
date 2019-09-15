@@ -37,3 +37,4 @@ echo -e "$default \c"
 wssh --certfile=$certif --keyfile=$key --sslport=$port &> $logfile &
 
 echo "If the console is not accessible in the dashboard, check the log file $logfile"
+exit $?
