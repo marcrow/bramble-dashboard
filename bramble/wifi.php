@@ -83,17 +83,32 @@
 Refresh</a></h3>
                                         <br/>
                         <?php
-                        $int=shell_exec('sudo iw dev wlan0 scan | grep "SSID:\|signal:"');
-                        $i=0;
-                        foreach(preg_split("/((signal:))/", $int) as $line){
+			function getInterface(){
+				return shell_exec('sudo /sbin/iw dev | grep "Interface" | cut -d " " -f2');
+
+			}
+			$wifiInterfaces = getInterface();
+			echo $wifiInterfaces;
+                        $int=shell_exec('sudo /sbin/iw dev wlan0 scan | grep "SSID:\|signal:\|(on "');
+			$i=0;
+			$bssSet = array();
+                        foreach(preg_split("/((BSS ))/", $int) as $info){
                             $i=$i+1;
+				if(preg_match("/((\(on ))/",$info) != 1)
+					continue;
+				list($bss,$value) = explode("(on ",$info,2);
+				if(in_array($bss,$bssSet)) continue;
+				array_push($bssSet,$bss);
+				$connected="";
+				if(preg_match("/((associated))/", $info)==1){
+					$connected='<i class="far fa-check-circle"></i>';
+				}
+				foreach(preg_split("/((signal: ))/", $info) as $line){ 
                             //<-40 perfect, <-50 excellent, <-60 good, <-70 medium, <-80 Unreliable, <-90 too low
 			    			if(empty($line)|| strlen($line)==1){
 			    				continue;
 			    			}
 							if(preg_match("/((SSID: ))/",$line)!=1){
-								echo "error :";
-								echo $line;
 								continue;
 							}
                             list($signal, $ssid) = explode("SSID: ", $line, 2);
@@ -132,17 +147,22 @@ Refresh</a></h3>
                                 // echo '<div class="card bg-danger">';
                                 $badge='<span class="badge badge-danger float-right">Signal quality : Really bad</span>';
                             }
+			    else{
+				$signal="unusable";
+                                // echo '<div class="card bg-danger">';
+                                $badge='<span class="badge badge-dark float-right">Signal quality : Unusable</span>';
+			    }
                             echo '<div class="card bg-light">';
                             $name="collapse$i";
                             echo '<div class="card-header '.$name.'">
                                     <h5 class="mb-0">
                                        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#'.$name.'" aria-expanded="false" aria-controls="'.$name.'">
                                          <span class="fas fa-angle-down mr-3"></span>'.$ssid.'
-                                     </button>'.$badge.'</h5>
+                                     '.$connected.'</button>'.$badge.'</h5>
                                 </div>';
                             echo '<div id="'.$name.'" class="collapse" aria-labelledby="headingEleven" data-parent="#accordion4">
                                     <div class="card-body">
-
+					    <span>BSSid : '.$bss.'</span>
                                             <h5 class="card-header">Connection Form</h5>
                                             <div class="card-body">
                                                 <form action="#" id="'.$name.'" data-parsley-validate="">
@@ -150,8 +170,17 @@ Refresh</a></h3>
                                                         <label for="inputPassword'.$i.'">Wifi Password</label>
                                                         <input id="inputPassword'.$i.'" type="password" placeholder="Wifi password" required="" class="form-control">
                                                     </div>
-                                                    <button class="btn btn-space btn-light" onclick="display_password('.$i.')" id="disp'.$i.'">Display password</button>
-                                                    <div class="row">
+                                                    <button class="btn btn-space btn-light" onclick="display_password('.$i.')" id="disp'.$i.'">Display password</button>';
+				echo '<div class="form-group">';
+				echo '<label>Wifi Interface</label><br/>';
+				foreach(explode("\n",$wifiInterfaces) as $interface){
+					if($interface=="") continue;
+					echo '<label class="custom-control custom-radio custom-control-inline">
+                                               	<input type="radio" name="radio-inline" checked="" class="custom-control-input"><span class="custom-control-label">'.$interface.'</span>
+                                         	</label>';
+				}
+				echo '</div>';
+				echo '<div class="row">
                                                         <div class="col-sm-6 pl-0">
                                                             <p class="text-right">
                                                                 <button type="submit" class="btn btn-space btn-dark">Connect</button>
@@ -168,6 +197,7 @@ Refresh</a></h3>
 
                             //echo "<p>$line</p>";
                         }
+			}
                         echo '</div></div></div></div>';
                         ?>
                     </div>
