@@ -88,7 +88,7 @@ Refresh</a></h3>
 
 			}
 			$wifiInterfaces = getInterface();
-			echo $wifiInterfaces;
+			echo '<p>Note: Some wifi access points may appear several times in the list. This generally means that several wifi terminals offer access to the same wifi "network". This is usually the case on a university campus or offices. Select the one with the best signal or the one that is least used.</p>';
                         $int=shell_exec('sudo /sbin/iw dev wlan0 scan | grep "SSID:\|signal:\|(on "');
 			$i=0;
 			$bssSet = array();
@@ -162,21 +162,23 @@ Refresh</a></h3>
                                 </div>';
                             echo '<div id="'.$name.'" class="collapse" aria-labelledby="headingEleven" data-parent="#accordion4">
                                     <div class="card-body">
-					    <span>BSSid : '.$bss.'</span>
                                             <h5 class="card-header">Connection Form</h5>
                                             <div class="card-body">
-                                                <form action="#" id="'.$name.'" data-parsley-validate="">
-                                                    <div class="form-group">
+                                                <form method="post" action="change_wifi.php" id="'.$name.'" data-parsley-validate="">
+						    <div class="form-group">
+                                                        <span >BSSid : '.$bss.'</span>
+							<input type="hidden" value="'.$ssid.'" name="essid" />
+							<input type="hidden" value="'.$bss.'" name="bssid" />
                                                         <label for="inputPassword'.$i.'">Wifi Password</label>
-                                                        <input id="inputPassword'.$i.'" type="password" placeholder="Wifi password" required="" class="form-control">
+                                                        <input id="inputPassword'.$i.'" type="password" name="password" placeholder="Wifi password" required="" class="form-control">
                                                     </div>
-                                                    <button class="btn btn-space btn-light" onclick="display_password('.$i.')" id="disp'.$i.'">Display password</button>';
+                                                    <button class="btn btn-space btn-light" type="button" onclick="display_password('.$i.')" id="disp'.$i.'">Display password</button>';
 				echo '<div class="form-group">';
 				echo '<label>Wifi Interface</label><br/>';
 				foreach(explode("\n",$wifiInterfaces) as $interface){
 					if($interface=="") continue;
 					echo '<label class="custom-control custom-radio custom-control-inline">
-                                               	<input type="radio" name="radio-inline" checked="" class="custom-control-input"><span class="custom-control-label">'.$interface.'</span>
+                                               	<input type="radio" name="radio-inline" value="'.$interface.'" checked="" class="custom-control-input"><span class="custom-control-label">'.$interface.'</span>
                                          	</label>';
 				}
 				echo '</div>';
