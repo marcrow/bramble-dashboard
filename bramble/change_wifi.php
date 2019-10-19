@@ -20,19 +20,23 @@
 	//$password = str_replace("\\","\\\\",$password);
 	//$password = str_replace("&quot;","\&quot;",$password);
 	//$password=escapeshellcmd($password);
-	echo $password."\n--";
+	echo $password."--";
 
 	$essid = htmlspecialchars($_POST['essid']);
+	$essid = substr($essid, 0, -2);
 	//$essid = str_replace("\\","\\\\",$essid);
         //$essid = str_replace("&quot;","\&quot;",$essid);
-
 	echo $essid."****";
 
 	
-	$str = '/usr/bin/wifi "'.escapeshellcmd($interface).'"  "'.escapeshellcmd($essid).'"  "'.escapeshellcmd($bssid).'"  "'.escapeshellcmd($password).'"';
-	echo $str;
-	exit();
-	$str = shell_exec('/usr/bin/wifi "'.escapeshellcmd($interface).'"  "'.escapeshellcmd($essid).'"  "'.escapeshellcmd($bssid).'"  "'.escapeshellcmd($password).'"');
+	$str = "sudo /usr/bin/wifi ".escapeshellarg($interface)."  ".escapeshellarg($essid)."  ".escapeshellarg($bssid)."  ".escapeshellarg($password).' test';
+	//echo $str;
+	//exit();
+	$str = shell_exec($str);
+	//$str = shell_exec('/usr/bin/wifi "'.escapeshellcmd($interface).'"  "'.escapeshellcmd($essid).'"  "'.escapeshellcmd($bssid).'"  "'.escapeshellcmd($password).'"');
 	echo "--".$str."--";
+
+	$str = shell_exec("sudo /var/www/bramble-dashboard/bramble/tools/restartInterface.sh ".escapeshellarg($interface));
+	echo $str;
 	
 ?>
