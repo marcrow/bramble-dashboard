@@ -1,4 +1,8 @@
 <?php
+include 'tools/security.php';
+secure_page();
+?>
+<?php
 
 
 	echo htmlspecialchars($_POST['radio-inline']);

@@ -1,3 +1,7 @@
+<?php
+include 'tools/security.php';
+secure_page();
+?>
 <!doctype html>
 <html lang="en">
 
