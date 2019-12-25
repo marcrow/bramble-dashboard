@@ -12,10 +12,15 @@ default="\e[39m"
 echo -e "$red \c"
 
 systemctl start apache2 2>&1
-
 if [[ $? -ne 0 ]]; then
 	echo "Error : Unable to start apache"
 	exit -1
+fi
+
+systemctl start mariadb 2>&1
+if [[ $? -ne 0 ]]; then
+        echo "Error : Unable to start mariadb"
+        exit -1
 fi
 
 
