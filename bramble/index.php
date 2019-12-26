@@ -95,7 +95,28 @@ secure_page();
                                 <h3 class="section-title">General</h3>
                             </div>
                         </div>
-
+			<div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h3 class="card-header text-center">Connected as</h3>
+                                    <p class="card-text lead text-center"><?php echo $_SESSION['username']; ?></p>
+			   	</div>
+                    	    </div>
+			</div>
+			<div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
+                            <div class="card">
+                                <div class="card-body">
+				    <h3 class="card-header text-center">Function</h3>
+                                    <p class="card-text lead text-center">
+					<?php 
+						if($_SESSION['is_admin']==1)
+							echo "Admin";
+						else
+							echo "User";
+					 ?></p>
+                                </div>
+                            </div>
+                        </div>
                         <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
                             <div class="card">
                                 <div class="card-body">

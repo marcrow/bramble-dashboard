@@ -15,17 +15,20 @@ if(empty($_POST['username'])) {
     } else {
 		$res=10;
 		echo $username." ".$password;
-		$Requete = mysqli_query($mysqli,'CALL check_auth("'.$username.'","'.$password.'","tmp", @res);');
+		$Requete = mysqli_query($mysqli,'CALL check_auth("'.$username.'","'.$password.'","tmp", @res, @isAdmin);');
 		$select = mysqli_query($mysqli, 'SELECT @res');
 		$result = mysqli_fetch_assoc($select);
-		echo $result['@res'];
-		print_r($result);
-		echo "-----***";
+		//echo $result['@res'];
+		//print_r($result);
+		//echo "-----***";
 		if($result['@res'] != 1) {
 		        echo "Le pseudo ou le mot de passe est incorrect, le compte n'a pas été trouvé.";
 				session_write_close();
 				header("Location: /login.php?msg=afail1");
 		        } else {
+			    $select = mysqli_query($mysqli, 'SELECT @isAdmin');
+                	    $result = mysqli_fetch_assoc($select);
+			    $_SESSION['is_admin'] = $result['@isAdmin'];
 		            $_SESSION['username'] = $username;
 		            $_SESSION['time'] = time(); 
 					header('Location: index.php'); 
