@@ -17,9 +17,9 @@ if [[ $? -ne 0 ]]; then
 	exit -1
 fi
 
-systemctl start mariadb 2>&1
+systemctl start mysql 2>&1
 if [[ $? -ne 0 ]]; then
-        echo "Error : Unable to start mariadb"
+        echo "Error : Unable to start mysql"
         exit -1
 fi
 

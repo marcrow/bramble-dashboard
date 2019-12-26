@@ -5,4 +5,4 @@ for pid in $(ps -aux | grep wssh | awk '{print $2}'); do
 done
 
 systemctl stop apache2
-systemctl stop mariadb
+systemctl stop mysql
