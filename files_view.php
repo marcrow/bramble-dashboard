@@ -44,7 +44,7 @@ secure_page();
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 embed-responsive-16by9">
 			<iframe
 			<?php
-				echo 'src="https://'.$_SERVER["SERVER_ADDR"].':80" width="100%" height="500" id="console_frame" class="embed-responsive-item" name="console_frame" allowfullscreen>';
+				echo 'src="https://'.$_SERVER["SERVER_ADDR"].'/DirectoryLister/index.php" width="100%" height="500" id="console_frame" class="embed-responsive-item" name="console_frame" allowfullscreen>';
 			?>
 			  <p>
 			<?php
