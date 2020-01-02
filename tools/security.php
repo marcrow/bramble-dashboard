@@ -16,6 +16,15 @@ function secure_page(){
 	$_SESSION['time'] = time(); 
 }
 
+function admin_only(){
+	secure_page();
+	if($_SESSION['is_admin']!=1){
+		header("Location: /login.php?msg=afail3");
+                exit();
+	}
+}
+
+
 function disconnect(){
 	session_start();
 	$_SESSION = array();
