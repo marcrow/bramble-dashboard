@@ -43,7 +43,30 @@ admin_only();
         <div class="card">
             <div class="card-header">
                 <h3 class="mb-1">Create a new account</h3>
-                <p>Please enter the new user's information.</p>
+		<?php
+		if(isset($_GET['msg'])){
+			$msg=$_GET['msg'];
+			if($msg=="afail1"){
+
+				echo '<div class="alert alert-danger" role="alert">Username field is empty.</div>';
+			}
+			if($msg=="afail2"){
+				echo '<div class="alert alert-danger" role="alert">Email field is empty.</div>';
+			}
+			if($msg=="afail3"){
+                echo '<div class="alert alert-danger" role="alert">Password field is empty.</div>';
+            }
+			if($msg=="afail4"){
+				echo '<div class="alert alert-info" role="alert">Error unable to connect to the database</div>';
+			}
+			if($msg=="afail5"){
+				echo '<div class="alert alert-info" role="alert">Creation failed</div>';
+			}
+		}
+		else{
+			echo '<div class="alert alert-primary" role="alert">Please enter the new user information.</div>';
+		}
+	    ?>
             </div>
             <div class="card-body">
                 <div class="form-group">
