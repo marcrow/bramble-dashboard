@@ -1,6 +1,6 @@
 <?php
 if($_SESSION['is_admin']!=1){
-	exit();
+	goto end;
 }
 ?>
 <div class="row">
@@ -63,3 +63,6 @@ if($_SESSION['is_admin']!=1){
 		</div>
 	</div>
 </div>
+<?php
+	end:
+?>
