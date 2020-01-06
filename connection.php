@@ -13,6 +13,13 @@ if(empty($_POST['username'])) {
     if(!$mysqli){
         echo "Error unable to connect to the database";
     } else {
+		//Protection against brutforce
+		$current_date = date("o-m-d");
+		$query_fails = "SELECT nfail FROM fail WHERE day='".$current_date."';";
+		$fails = mysqli_query($mysqli,$query_fails);
+		$nb_fails = mysqli_fetch_assoc($fails);
+		sleep((int)$nb_fails['nfail']);
+		//end bruteforce protection
 		$res=10;
 		echo $username." ".$password;
 		$Requete = mysqli_query($mysqli,'CALL check_auth("'.$username.'","'.$password.'","tmp", @res, @isAdmin);');

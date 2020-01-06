@@ -34,7 +34,9 @@
     <!-- ============================================================== -->
     <div class="splash-container">
         <div class="card darkly">
-            <div class="card-header text-center darkly"><img class="logo-img img-fluid" src="assets/images/logo.png" alt="logo"></a><?php
+            <div class="card-header text-center darkly"><img class="logo-img img-fluid" src="assets/images/logo.png" alt="logo"></a>
+	
+	<?php
 	ini_set('display_errors', 1);
 	ini_set('display_startup_errors', 1);
 	error_reporting(E_ALL);
@@ -45,7 +47,7 @@
 			$msg=$_GET['msg'];
 			if($msg=="afail1"){
 
-				echo '<div class="alert alert-danger" role="alert">Username or password incorrect.</div>';
+				echo '<div class="alert alert-danger" role="alert">Username or password incorrect. Each error increases the waiting time by one second before the next attempt.</div>';
 			}
 			if($msg=="afail2"){
 				echo '<div class="alert alert-danger" role="alert">Please login to access this page.</div>';
