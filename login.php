@@ -50,7 +50,7 @@
 				echo '<div class="alert alert-danger" role="alert">Username or password incorrect. Each error increases the waiting time by one second before the next attempt.</div>';
 			}
 			if($msg=="afail2"){
-				echo '<div class="alert alert-danger" role="alert">Please login to access this page.</div>';
+				echo '<div class="alert alert-danger" role="alert">Please sign in to access to this page.</div>';
 			}
 			if($msg=="afail3"){
                                 echo '<div class="alert alert-danger" role="alert"> Your session has expired.</div>';
@@ -71,17 +71,10 @@
                     <div class="form-group">
                         <input class="form-control form-control-lg" name="password" id="password" type="password" placeholder="Password">
                     </div>
-                    <div class="form-group">
-                        <label class="custom-control custom-checkbox">
-                            <input class="custom-control-input" type="checkbox"><span class="custom-control-label">Remember Me</span>
-                        </label>
-                    </div>
                     <button type="submit" class="btn btn-success btn-lg btn-block">Sign in</button>
                 </form>
             </div>
             <div class="card-footer bg-white p-0  ">
-                <div class="card-footer-item card-footer-item-bordered">
-                    <a href="index.php" class="footer-link">Create An Account</a></div>
                 <div class="card-footer-item card-footer-item-bordered">
                     <a href="#" class="footer-link">Forgot Password</a>
                 </div>
