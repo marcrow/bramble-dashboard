@@ -40,8 +40,8 @@
 	ini_set('display_errors', 1);
 	ini_set('display_startup_errors', 1);
 	error_reporting(E_ALL);
-		#$browser = get_browser(null, true);
-		#print_r($browser);
+		$browser = get_browser(null, true);
+		print_r($browser);
 
 		if(isset($_GET['msg'])){
 			$msg=$_GET['msg'];
@@ -58,6 +58,9 @@
 			if($msg=="disconnected"){
 				echo '<div class="alert alert-info" role="alert">You has been disconnected</div>';
 			}
+			if($msg=="reset"){
+                                echo '<div class="alert alert-success" role="alert"> The password has been changed.</div>';
+                        }
 		}
 		else{
 			echo '<div class="alert alert-primary" role="alert">Please enter your user information.</div>';
@@ -76,7 +79,7 @@
             </div>
             <div class="card-footer bg-white p-0  ">
                 <div class="card-footer-item card-footer-item-bordered">
-                    <a href="#" class="footer-link">Forgot Password</a>
+                    <a href="forgot-password.php" class="footer-link">Forgot Password</a>
                 </div>
             </div>
         </div>
