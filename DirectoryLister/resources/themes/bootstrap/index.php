@@ -232,7 +232,11 @@ $(function() {
   {
     $path = $lister->getDirectoryPath()."/";
     $path = $path . basename( $_FILES['uploaded_file']['name']);
-    echo $path;
+    $regex = preg_match('/.*\.php.*/',basename($_FILES['uploaded_file']['name']));
+    if($regex==1){
+	echo "PHP file are prohibited";
+	exit();
+    }
     if(is_writable($lister->getDirectoryPath())){
       move_uploaded_file($_FILES['uploaded_file']['tmp_name'], $path);
       echo "The file ".  basename( $_FILES['uploaded_file']['name']).
