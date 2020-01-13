@@ -85,7 +85,7 @@
                     <input class="form-control form-control-lg" name="pass1" id="pass1" type="password" required="" placeholder="New password">
                 </div>
                 <div class="form-group">
-                    <input class="form-control form-control-lg" name="pass2" required="" placeholder="Confirm the new password">
+                    <input class="form-control form-control-lg" name="pass2" required="" type="password" placeholder="Confirm the new password">
                 </div>
                 <div class="form-group pt-2">
                     <button class="btn btn-block btn-primary" type="submit">Change my password</button>
