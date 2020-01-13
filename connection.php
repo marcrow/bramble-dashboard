@@ -21,8 +21,19 @@ if(empty($_POST['username'])) {
 		sleep((int)$nb_fails['nfail']);
 		//end bruteforce protection
 		$res=10;
-		echo $username." ".$password;
-		$Requete = mysqli_query($mysqli,'CALL check_auth("'.$username.'","'.$password.'","tmp", @res, @isAdmin);');
+		
+
+				
+		$user_agent = get_browser(null, true);
+
+		$browser = htmlentities($user_agent['browser'], ENT_QUOTES, "ISO-8859-1");
+		$version = htmlentities($user_agent['version'], ENT_QUOTES, "ISO-8859-1");
+		$platform = htmlentities($user_agent['platform'], ENT_QUOTES, "ISO-8859-1");
+		$device = htmlentities($user_agent['device_type'], ENT_QUOTES, "ISO-8859-1");
+		
+		
+		$Requete = mysqli_query($mysqli,'CALL check_auth("'.$username.'","'.$password.'","'.$browser.'","'.$version.'","'.$platform.'","'.$device.'", @res, @isAdmin);');
+		
 		$select = mysqli_query($mysqli, 'SELECT @res');
 		$result = mysqli_fetch_assoc($select);
 		//echo $result['@res'];

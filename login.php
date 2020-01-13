@@ -37,12 +37,6 @@
             <div class="card-header text-center darkly"><img class="logo-img img-fluid" src="assets/images/logo.png" alt="logo"></a>
 	
 	<?php
-	ini_set('display_errors', 1);
-	ini_set('display_startup_errors', 1);
-	error_reporting(E_ALL);
-		$browser = get_browser(null, true);
-		print_r($browser);
-
 		if(isset($_GET['msg'])){
 			$msg=$_GET['msg'];
 			if($msg=="afail1"){
