@@ -133,14 +133,55 @@ secure_page();
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    
 
                     <!-- ============================================================== -->
                     <!-- end info  -->
                     <!-- ============================================================== -->
-                    
+		 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                            <div class="card">
+				<div class="card-header">
+                                    <h3 class="card-title">Last connections</h3>
+				</div>
+			<div class="card-body table-responsive" style="max-height:200px;">
 
-					<!-- ============================================================== -->
+                <?php
+		$mysqli = mysqli_connect("localhost", "web_agent", "password", "bramble");
+    		if(!$mysqli){
+        		echo "Error unable to connect to the database";
+			goto end;
+    		}
+		echo '<table  class="table table-striped">
+					<thead class="thead-dark">
+					    <tr>
+						<th class="d-none d-md-block" scope="col">Name</th>
+						<th scope="col">date</th>
+						<th scope="col">browser</th>
+						<th class="d-none d-md-block" scope="col">version</th>
+						<th scope="col">platform</th>
+						<th scope="col">device</th>
+					    </tr>
+					</thead>
+					<tbody class="table-hover">';
+		$select = mysqli_query($mysqli,'SELECT * FROM log WHERE name="'.$_SESSION['username'].'" ORDER BY date DESC;');
+		if(mysqli_num_rows($select) > 0 ){
+			while ($tab = mysqli_fetch_array($select)) {
+				echo '<tr><td class="d-none d-md-block">'.$tab['name'].'</td>';
+				echo '<td>'.$tab['date'].'</td>';
+				echo '<td>'.$tab['browser'].'</td>';
+				echo '<td class="d-none d-md-block">'.$tab['version'].'</td>';
+				echo '<td>'.$tab['platform'].'</td>';
+				echo '<td>'.$tab['device'].'</td></tr>';
+			}
+			echo '</tbody></table>';
+		}
+		end:
+		?>
+		</div>
+                            </div>
+                        </div>
+		</div>
+	            <!-- ============================================================== -->
                     <!-- Admin panel  -->
                     <!-- ============================================================== -->
 		    		<?php include 'tools/admin_panel.php';?>
@@ -717,6 +758,8 @@ secure_page();
     <!-- ============================================================== -->
     <!-- end main wrapper  -->
     <!-- ============================================================== -->
+
+
     <!-- Optional JavaScript -->
     <!-- jquery 3.3.1 -->
     <script src="assets/vendor/jquery/jquery-3.3.1.min.js"></script>
