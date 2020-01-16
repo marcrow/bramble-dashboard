@@ -42,7 +42,7 @@ class DirectoryLister {
         $this->_appDir = __DIR__;
 
         // Build the application URL
-        $this->_appURL = $this->_getAppUrl();
+        $this->_appURL = $this->_getAppUrl()."index.php";
 
         // Load the configuration file
         $configFile = $this->_appDir . '/config.php';
@@ -199,7 +199,6 @@ class DirectoryLister {
 
         // Generate breadcrumbs
         $dirPath  = null;
-
         foreach ($dirArray as $key => $dir) {
 
             if ($dir != '.') {
@@ -563,10 +562,8 @@ class DirectoryLister {
                 if (substr($relativePath, 0, 2) == './') {
                     $relativePath = substr($relativePath, 2);
                 }
-
                 // Don't check parent dir if we're in the root dir
                 if ($this->_directory == '.' && $file == '..'){
-
                     continue;
 
                 } else {

@@ -1,7 +1,8 @@
 <?php
+    include '../tools/security.php';
+    secure_page();
     // Include the DirectoryLister class
     require_once('resources/DirectoryLister.php');
-
     // Initialize the DirectoryLister object
     $lister = new DirectoryLister();
 
