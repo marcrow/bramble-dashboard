@@ -62,6 +62,27 @@ if($_SESSION['is_admin']!=1){
 			</div>
 		</div>
 	</div>
+	 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+            <div class="card">
+                        <h5 class="card-header">Bramble menu configuration</h5>
+            <div class="card-body">
+	<form name="menuConf" action="change_menu.php" method="post">
+	<label class="custom-control custom-radio custom-control-inline">
+        <?php
+		$bPath = getenv('BRAMBLE_PATH');
+		$cmd = "$bPath/option/src/changeLvl.sh --current";
+		$mode = shell_exec($cmd);
+	?>
+	<input type="radio" name="menuConf" value="Classic" <?php if($mode==0) echo 'checked=""'?> class="custom-control-input"><span class="custom-control-label">Classic</span>
+        </label>
+        <label class="custom-control custom-radio custom-control-inline">
+              <input type="radio" name="menuConf" value="Light" <?php if($mode==1) echo 'checked=""'?> class="custom-control-input"><span class="custom-control-label">Light</span>
+       </label>
+		<button type="submit" class="btn btn-success btn-lg btn-block">Change</button>
+	</form>
+	</div>
+	</div>
+
 </div>
 <?php
 	end:
