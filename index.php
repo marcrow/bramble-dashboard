@@ -76,6 +76,15 @@ secure_page();
                     <!-- info  -->
                     <!-- ============================================================== -->
 
+		   <?php
+			if(isset($_GET['msg'])){
+                        	$msg=$_GET['msg'];
+                        	if($msg=="input_error"){
+                                	echo '<div class="alert alert-danger" role="alert">Error : Incorrect Input</div>';
+                        	}
+			}
+		   ?>
+
 
                     <?php //check the internet connectivity
                         $host = 'google.com';

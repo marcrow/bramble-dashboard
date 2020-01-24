@@ -34,7 +34,7 @@
     <!-- ============================================================== -->
     <div class="splash-container">
         <div class="card darkly">
-            <div class="card-header text-center darkly"><img class="logo-img img-fluid" src="assets/images/logo.png" alt="logo"></a>
+            <div class="card-header text-center darkly"><img class="logo-img img-fluid" style="width:60%" src="assets/images/logo.png" alt="logo"></a>
 	
 	<?php
 		if(isset($_GET['msg'])){
@@ -88,4 +88,3 @@
 </body>
  
 </html>
-
